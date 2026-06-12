@@ -1,5 +1,8 @@
 <template>
-  <div class="w-full mt-[90px] bg-[#0b0b0b] min-h-screen text-gray-200 font-sans selection:bg-rose-600 selection:text-white antialiased">
+  <div 
+    class="w-full min-h-screen font-sans selection:bg-rose-600 selection:text-white antialiased transition-colors duration-300"
+    :class="currentTheme === 'dark' ? 'bg-[#0b0b0b] text-gray-200' : 'bg-gray-50 text-gray-800'"
+  >
 
     <div class="w-full mx-auto relative group">
       <div class="relative shadow-2xl overflow-hidden aspect-[16/9] md:aspect-[21/9] w-full max-h-[550px] bg-black">
@@ -23,8 +26,13 @@
             :class="currentSlide === index ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 z-0 pointer-events-none'"
           >
             <img :src="slide.img" class="w-full h-full object-cover object-center" :alt="slide.alt">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0b0b] via-[#0b0b0b]/40 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-[#0b0b0b]/50 via-transparent to-[#0b0b0b]/50"></div>
+            <div 
+              class="absolute inset-0 transition-colors duration-300"
+              :class="currentTheme === 'dark' 
+                ? 'bg-gradient-to-t from-[#0b0b0b] via-[#0b0b0b]/40 to-transparent' 
+                : 'bg-gradient-to-t from-gray-50 via-gray-50/20 to-transparent'"
+            ></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30"></div>
           </div>
         </div>
       </div>
@@ -32,17 +40,24 @@
 
     <div class="max-w-[1280px] mx-auto px-4 md:px-6 py-12">
       
-      <div class="flex items-center justify-center md:justify-start gap-8 mb-8 border-b border-neutral-800 pb-px">
+      <div 
+        class="flex items-center justify-center md:justify-start gap-8 mb-8 border-b pb-px transition-colors duration-300"
+        :class="currentTheme === 'dark' ? 'border-neutral-800' : 'border-neutral-300'"
+      >
         <h2 
           class="font-black text-xl md:text-2xl cursor-pointer select-none pb-4 border-b-4 tracking-wider uppercase transition-all duration-300"
-          :class="activeTab === 'now-showing' ? 'text-white border-rose-600' : 'text-neutral-500 border-transparent hover:text-neutral-300'"
+          :class="activeTab === 'now-showing' 
+            ? 'text-rose-600 border-rose-600' 
+            : 'text-neutral-500 border-transparent hover:text-neutral-400'"
           @click="changeTab('now-showing')"
         >
           {{ t.nowShowing }}
         </h2>
         <h2 
           class="font-black text-xl md:text-2xl cursor-pointer select-none pb-4 border-b-4 tracking-wider uppercase transition-all duration-300"
-          :class="activeTab === 'coming-soon' ? 'text-white border-rose-600' : 'text-neutral-500 border-transparent hover:text-neutral-300'"
+          :class="activeTab === 'coming-soon' 
+            ? 'text-rose-600 border-rose-600' 
+            : 'text-neutral-500 border-transparent hover:text-neutral-400'"
           @click="changeTab('coming-soon')"
         >
           {{ t.comingSoon }}
@@ -54,11 +69,17 @@
           v-for="(date, index) in currentDates" 
           :key="index"
           class="flex flex-col justify-center text-center px-5 py-3 min-w-[105px] rounded-xl cursor-pointer select-none border snap-start transition-all duration-300 group"
-          :class="activeDateIndex === index ? 'border-rose-600 bg-rose-600 text-white shadow-lg shadow-rose-600/20' : 'bg-[#141414] border-neutral-800/60 text-neutral-400 hover:border-neutral-700 hover:bg-[#1a1a1a]'" 
+          :class="[
+            activeDateIndex === index 
+              ? 'border-rose-600 bg-rose-600 text-white shadow-lg shadow-rose-600/20' 
+              : (currentTheme === 'dark' 
+                  ? 'bg-[#141414] border-neutral-800/60 text-neutral-400 hover:border-neutral-700 hover:bg-[#1a1a1a]' 
+                  : 'bg-white border-neutral-200 text-gray-500 hover:border-neutral-400 hover:bg-gray-100')
+          ]" 
           @click="selectDate(index)"
         >
-          <span class="text-[11px] font-bold tracking-wider uppercase opacity-80 group-hover:opacity-100" :class="activeDateIndex === index ? 'text-white' : 'text-neutral-400'">{{ date.dayName }}</span>
-          <span class="text-2xl font-black my-1 tracking-tight" :class="activeDateIndex === index ? 'text-white' : 'text-neutral-100'">{{ date.dayNumber }}</span>
+          <span class="text-[11px] font-bold tracking-wider uppercase opacity-80" :class="activeDateIndex === index ? 'text-white' : 'text-neutral-400'">{{ date.dayName }}</span>
+          <span class="text-2xl font-black my-1 tracking-tight" :class="activeDateIndex === index ? 'text-white' : (currentTheme === 'dark' ? 'text-neutral-100' : 'text-gray-800')">{{ date.dayNumber }}</span>
           <span class="text-[11px] font-bold uppercase tracking-widest opacity-70" :class="activeDateIndex === index ? 'text-white/90' : 'text-neutral-500'">{{ date.month }}</span>
         </div>
       </div>
@@ -72,7 +93,10 @@
             class="flex flex-col group/card cursor-pointer relative"
           >
             
-            <div class="relative aspect-[2/3] w-full rounded-xl overflow-hidden shadow-xl border border-neutral-800/50 bg-[#141414]">
+            <div 
+              class="relative aspect-[2/3] w-full rounded-xl overflow-hidden shadow-xl border transition-colors duration-300"
+              :class="currentTheme === 'dark' ? 'border-neutral-800/50 bg-[#141414]' : 'border-neutral-200 bg-gray-200'"
+            >
               <img :src="movie.poster" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105" :alt="movie.title[currentLang]">
               
               <div class="absolute top-3 left-3 right-3 flex justify-between items-center z-20 pointer-events-none">
@@ -102,12 +126,18 @@
             </div>
             
             <div class="mt-4 px-1 flex flex-col flex-grow">
-              <h5 class="text-sm md:text-base font-bold text-neutral-100 tracking-wide line-clamp-1 group-hover/card:text-rose-500 transition-colors duration-200">
+              <h5 
+                class="text-sm md:text-base font-bold tracking-wide line-clamp-1 group-hover/card:text-rose-500 transition-colors duration-200"
+                :class="currentTheme === 'dark' ? 'text-neutral-100' : 'text-gray-900'"
+              >
                 {{ movie.title[currentLang] }}
               </h5>
               <div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
-                <span v-for="fmt in movie.formats || ['2D']" :key="fmt" class="text-[9px] font-extrabold px-1.5 py-0.5 bg-neutral-900 border border-neutral-800 rounded text-neutral-400">
-                  {{ fmt }}
+                <span 
+                  class="text-[9px] font-extrabold px-1.5 py-0.5 border rounded transition-colors duration-300"
+                  :class="currentTheme === 'dark' ? 'bg-neutral-900 border-neutral-800 text-neutral-400' : 'bg-gray-100 border-gray-300 text-gray-600'"
+                >
+                  {{ movie.formats ? movie.formats[0] : '2D' }}
                 </span>
                 <span class="text-xs text-neutral-500 font-medium ml-1">{{ movie.type }}</span>
               </div>
@@ -115,11 +145,17 @@
 
           </div>
         </template>
+        <div v-else class="col-span-full py-12 text-center text-sm text-neutral-500">
+          {{ t.noMovies }}
+        </div>
       </div>
     </div>
 
     <div v-if="selectedMovie" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto transition-opacity duration-300 animate-fadeIn">
-      <div class="relative w-full max-w-[950px] bg-[#0f0a0a] border border-neutral-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row my-8">
+      <div 
+        class="relative w-full max-w-[950px] border rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row my-8 transition-colors duration-300"
+        :class="currentTheme === 'dark' ? 'bg-[#0f0a0a] border-neutral-800' : 'bg-white border-neutral-300 text-gray-800'"
+      >
         
         <button @click="closeMovieDetail" class="absolute top-4 right-4 z-50 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white/80 hover:text-white hover:bg-rose-600 transition-colors">
           <span class="text-xl font-bold">&times;</span>
@@ -127,28 +163,42 @@
 
         <div v-if="bookingStep === 'info'" class="relative w-full md:w-2/5 aspect-[2/3] md:aspect-auto md:h-[550px]">
           <img :src="selectedMovie.poster" class="w-full h-full object-cover" :alt="selectedMovie.title[currentLang]">
-          <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#0f0a0a] via-transparent to-transparent"></div>
+          <div 
+            class="absolute inset-0 transition-all duration-300"
+            :class="currentTheme === 'dark' 
+              ? 'bg-gradient-to-t md:bg-gradient-to-r from-[#0f0a0a] via-transparent to-transparent' 
+              : 'bg-gradient-to-t md:bg-gradient-to-r from-white via-transparent to-transparent'"
+          ></div>
         </div>
 
-        <div class="w-full p-6 md:p-8 flex flex-col justify-between bg-gradient-to-b from-transparent to-[#0a0505]" :class="bookingStep === 'info' ? 'md:w-3/5' : 'w-full'">
+        <div 
+          class="w-full p-6 md:p-8 flex flex-col justify-between" 
+          :class="[
+            bookingStep === 'info' ? 'md:w-3/5' : 'w-full',
+            currentTheme === 'dark' ? 'bg-gradient-to-b from-transparent to-[#0a0505]' : 'bg-gradient-to-b from-transparent to-gray-50'
+          ]"
+        >
           
           <div v-if="bookingStep === 'info'">
-            <h3 class="text-2xl md:text-3xl font-black tracking-wide text-white mb-6">
+            <h3 
+              class="text-2xl md:text-3xl font-black tracking-wide mb-6"
+              :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'"
+            >
               {{ selectedMovie.title[currentLang] }}
             </h3>
 
-            <div class="space-y-4 text-sm text-neutral-300">
+            <div class="space-y-4 text-sm" :class="currentTheme === 'dark' ? 'text-neutral-300' : 'text-gray-600'">
               <div class="flex items-center gap-3">
                 <span class="text-neutral-400 font-medium min-w-[100px]">{{ currentLang === 'EN' ? 'Genre:' : 'ប្រភេទ៖' }}</span>
-                <span class="font-semibold text-neutral-200">{{ selectedMovie.type }}</span>
+                <span class="font-semibold" :class="currentTheme === 'dark' ? 'text-neutral-200' : 'text-gray-800'">{{ selectedMovie.type }}</span>
               </div>
               <div class="flex items-center gap-3">
                 <span class="text-neutral-400 font-medium min-w-[100px]">{{ currentLang === 'EN' ? 'Duration:' : 'រយៈពេល៖' }}</span>
-                <span class="font-semibold text-neutral-200">{{ selectedMovie.duration || '1h 36min' }}</span>
+                <span class="font-semibold" :class="currentTheme === 'dark' ? 'text-neutral-200' : 'text-gray-800'">{{ selectedMovie.duration || '1h 36min' }}</span>
               </div>
               <div class="flex items-center gap-3">
                 <span class="text-neutral-400 font-medium min-w-[100px]">{{ currentLang === 'EN' ? 'Release:' : 'ថ្ងៃបញ្ចាំង៖' }}</span>
-                <span class="font-semibold text-neutral-200">{{ selectedMovie.releaseDate }}</span>
+                <span class="font-semibold" :class="currentTheme === 'dark' ? 'text-neutral-200' : 'text-gray-800'">{{ selectedMovie.releaseDate }}</span>
               </div>
               <div class="flex items-center gap-3">
                 <span class="text-neutral-400 font-medium min-w-[100px]">{{ currentLang === 'EN' ? 'Rating:' : 'កម្រិតអាយុ៖' }}</span>
@@ -156,12 +206,12 @@
               </div>
             </div>
 
-            <div class="mt-8 border-t border-neutral-800/80 pt-6">
-              <div class="flex gap-6 border-b border-neutral-800 pb-2">
-                <button @click="modalSubTab = 'showtime'" class="text-base font-black uppercase tracking-wider pb-2 transition-colors relative" :class="modalSubTab === 'showtime' ? 'text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-rose-600' : 'text-neutral-500 hover:text-neutral-300'">
+            <div class="mt-8 border-t pt-6" :class="currentTheme === 'dark' ? 'border-neutral-800/80' : 'border-neutral-200'">
+              <div class="flex gap-6 border-b pb-2" :class="currentTheme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'">
+                <button @click="modalSubTab = 'showtime'" class="text-base font-black uppercase tracking-wider pb-2 transition-colors relative" :class="modalSubTab === 'showtime' ? 'text-rose-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-rose-600' : 'text-neutral-500 hover:text-neutral-400'">
                   {{ currentLang === 'EN' ? 'Showtime' : 'ម៉ោងបញ្ចាំង' }}
                 </button>
-                <button @click="modalSubTab = 'detail'" class="text-base font-black uppercase tracking-wider pb-2 transition-colors relative" :class="modalSubTab === 'detail' ? 'text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-rose-600' : 'text-neutral-500 hover:text-neutral-300'">
+                <button @click="modalSubTab = 'detail'" class="text-base font-black uppercase tracking-wider pb-2 transition-colors relative" :class="modalSubTab === 'detail' ? 'text-rose-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-rose-600' : 'text-neutral-500 hover:text-neutral-400'">
                   {{ currentLang === 'EN' ? 'Detail' : 'ព័ត៌មានលម្អិត' }}
                 </button>
               </div>
@@ -174,13 +224,14 @@
                       v-for="time in ['11:30 AM', '02:45 PM', '06:15 PM', '09:30 PM']" 
                       :key="time"
                       @click="selectShowtime(time)"
-                      class="px-4 py-2.5 bg-[#1a1313] border border-neutral-800 rounded-lg text-xs font-bold text-neutral-300 hover:border-rose-600 hover:text-white transition-colors"
+                      class="px-4 py-2.5 border rounded-lg text-xs font-bold transition-colors"
+                      :class="currentTheme === 'dark' ? 'bg-[#1a1313] border-neutral-800 text-neutral-300 hover:border-rose-600 hover:text-white' : 'bg-gray-100 border-gray-300 text-gray-700 hover:border-rose-600 hover:bg-white'"
                     >
                       {{ time }}
                     </button>
                   </div>
                 </div>
-                <div v-else class="text-xs text-neutral-400 leading-relaxed animate-fadeIn">
+                <div v-else class="text-xs leading-relaxed animate-fadeIn" :class="currentTheme === 'dark' ? 'text-neutral-400' : 'text-gray-600'">
                   {{ selectedMovie.title[currentLang] }} {{ currentLang === 'EN' ? 'is an incredible cinematic experience. Watch the exclusive visual screening at Legend Cinema with standard configurations.' : 'គឺជាភាពយន្តដ៏អស្ចារ្យដែលអ្នកមិនគួររំលង។ រីករាយទស្សនាជាមួយគុណភាពរូបភាពច្បាស់ត្រជាក់ភ្នែកនៅ Legend Cinema។' }}
                 </div>
               </div>
@@ -188,9 +239,8 @@
           </div>
 
           <div v-if="bookingStep === 'seats'" class="w-full animate-fadeIn">
-            
-            <div class="flex flex-col mb-6 border-b border-neutral-800 pb-4">
-              <h4 class="text-2xl font-black text-white tracking-wide">{{ selectedMovie.title[currentLang] }}</h4>
+            <div class="flex flex-col mb-6 border-b pb-4" :class="currentTheme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'">
+              <h4 class="text-2xl font-black tracking-wide" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">{{ selectedMovie.title[currentLang] }}</h4>
               <p class="text-xs text-rose-500 font-bold mt-1">
                 {{ currentLang === 'EN' ? 'Time:' : 'ម៉ោង៖' }} {{ selectedTime }} | 
                 {{ currentLang === 'EN' ? 'Date:' : 'ថ្ងៃទី៖' }} {{ currentDates[activeDateIndex].dayNumber }} {{ currentDates[activeDateIndex].month }}
@@ -204,7 +254,7 @@
 
             <div class="space-y-2 max-w-md mx-auto overflow-x-auto pb-2">
               <div v-for="row in seatPlan" :key="row.rowName" class="flex items-center justify-center gap-2 min-w-[340px]">
-                <span class="text-xs font-bold text-neutral-600 w-4">{{ row.rowName }}</span>
+                <span class="text-xs font-bold text-neutral-500 w-4">{{ row.rowName }}</span>
                 <div class="flex gap-1.5">
                   <button 
                     v-for="seat in row.seats" 
@@ -213,10 +263,10 @@
                     @click="toggleSeat(seat)"
                     class="w-7 h-7 rounded-md text-[9px] font-bold transition-all flex items-center justify-center"
                     :class="[
-                      seat.isTaken ? 'bg-neutral-800 text-neutral-600 cursor-not-allowed line-through' :
+                      seat.isTaken ? (currentTheme === 'dark' ? 'bg-neutral-800 text-neutral-600 cursor-not-allowed line-through' : 'bg-gray-300 text-gray-400 cursor-not-allowed line-through') :
                       selectedSeats.some(s => s.id === seat.id) ? 'bg-rose-600 text-white shadow-md shadow-rose-600/30 ring-2 ring-rose-400' :
-                      seat.type === 'VIP' ? 'bg-amber-600/20 border border-amber-500/40 text-amber-400 hover:bg-amber-600 hover:text-white' :
-                      'bg-neutral-900 border border-neutral-700 text-neutral-400 hover:border-rose-500 hover:text-white'
+                      seat.type === 'VIP' ? (currentTheme === 'dark' ? 'bg-amber-600/20 border border-amber-500/40 text-amber-400 hover:bg-amber-600 hover:text-white' : 'bg-amber-100 border border-amber-400 text-amber-700 hover:bg-amber-600 hover:text-white') :
+                      (currentTheme === 'dark' ? 'bg-neutral-900 border border-neutral-700 text-neutral-400 hover:border-rose-500 hover:text-white' : 'bg-white border border-gray-300 text-gray-700 hover:border-rose-500 hover:bg-gray-50')
                     ]"
                   >
                     {{ seat.num }}
@@ -226,19 +276,19 @@
             </div>
 
             <div class="flex justify-center gap-6 mt-6 text-[11px] font-medium text-neutral-400">
-              <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-neutral-900 border border-neutral-700"></span>{{ currentLang === 'EN' ? 'Available' : 'ទំនេរ' }}</div>
-              <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-amber-600/40 border border-amber-500"></span>VIP ($6.00)</div>
+              <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded border" :class="currentTheme === 'dark' ? 'bg-neutral-900 border-neutral-700' : 'bg-white border-gray-300'"></span>{{ currentLang === 'EN' ? 'Available' : 'ទំនេរ' }}</div>
+              <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded border" :class="currentTheme === 'dark' ? 'bg-amber-600/40 border-amber-500' : 'bg-amber-100 border-amber-400'"></span>VIP ($6.00)</div>
               <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-600"></span>{{ currentLang === 'EN' ? 'Selected' : 'បានរើស' }}</div>
-              <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-neutral-800 line-through"></span>{{ currentLang === 'EN' ? 'Sold' : 'លក់រួច' }}</div>
+              <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded line-through" :class="currentTheme === 'dark' ? 'bg-neutral-800' : 'bg-gray-300'"></span>{{ currentLang === 'EN' ? 'Sold' : 'លក់រួច' }}</div>
             </div>
 
-            <div class="mt-8 pt-5 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="mt-8 pt-5 border-t flex flex-col sm:flex-row items-center justify-between gap-4" :class="currentTheme === 'dark' ? 'border-neutral-800/80' : 'border-neutral-200'">
               <div>
                 <p class="text-xs text-neutral-400">{{ currentLang === 'EN' ? 'Selected Seats:' : 'កៅអីដែលបានជ្រើសរើស៖' }} 
-                  <span class="text-white font-bold ml-1" v-if="selectedSeats.length">{{ selectedSeats.map(s => s.id).join(', ') }}</span>
-                  <span class="text-neutral-600 italic ml-1" v-else>None</span>
+                  <span class="font-bold ml-1" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'" v-if="selectedSeats.length">{{ selectedSeats.map(s => s.id).join(', ') }}</span>
+                  <span class="text-neutral-500 italic ml-1" v-else>None</span>
                 </p>
-                <p class="text-sm font-black text-white mt-1">{{ currentLang === 'EN' ? 'Total Price:' : 'តម្លៃសរុប៖' }} <span class="text-rose-500">${{ totalPrice.toFixed(2) }}</span></p>
+                <p class="text-sm font-black mt-1" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">{{ currentLang === 'EN' ? 'Total Price:' : 'តម្លៃសរុប៖' }} <span class="text-rose-500">${{ totalPrice.toFixed(2) }}</span></p>
               </div>
               <button 
                 :disabled="!selectedSeats.length" 
@@ -251,34 +301,42 @@
           </div>
 
           <div v-if="bookingStep === 'checkout'" class="w-full animate-fadeIn">
-            <h4 class="text-lg font-black text-white mb-4 border-b border-neutral-800 pb-2">
+            <h4 class="text-lg font-black mb-4 border-b pb-2" :class="currentTheme === 'dark' ? 'text-white border-neutral-800' : 'text-gray-900 border-gray-200'">
               {{ currentLang === 'EN' ? 'Payment Checkout' : 'ការទូទាត់ប្រាក់' }}
             </h4>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="bg-neutral-900/40 border border-neutral-800/60 rounded-xl p-4 space-y-3">
+              <div 
+                class="border rounded-xl p-4 space-y-3"
+                :class="currentTheme === 'dark' ? 'bg-neutral-900/40 border-neutral-800/60' : 'bg-gray-50 border-gray-200'"
+              >
                 <p class="text-xs font-bold uppercase text-neutral-500 tracking-wider">{{ currentLang === 'EN' ? 'Order Summary' : 'សេចក្តីសង្ខេបការបញ្ជាទិញ' }}</p>
-                <div class="flex justify-between text-sm"><span class="text-neutral-400">Movie:</span><span class="font-bold text-white">{{ selectedMovie.title[currentLang] }}</span></div>
-                <div class="flex justify-between text-sm"><span class="text-neutral-400">Schedule:</span><span class="text-neutral-200">{{ selectedTime }} | Day {{ currentDates[activeDateIndex].dayNumber }}</span></div>
+                <div class="flex justify-between text-sm"><span class="text-neutral-400">Movie:</span><span class="font-bold" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">{{ selectedMovie.title[currentLang] }}</span></div>
+                <div class="flex justify-between text-sm"><span class="text-neutral-400">Schedule:</span><span :class="currentTheme === 'dark' ? 'text-neutral-200' : 'text-gray-700'">{{ selectedTime }} | Day {{ currentDates[activeDateIndex].dayNumber }}</span></div>
                 <div class="flex justify-between text-sm"><span class="text-neutral-400">Seats:</span><span class="font-black text-rose-500">{{ selectedSeats.map(s => s.id).join(', ') }}</span></div>
-                <hr class="border-neutral-800 my-2">
-                <div class="flex justify-between text-base font-black"><span class="text-white">Amount Due:</span><span class="text-emerald-500">${{ totalPrice.toFixed(2) }}</span></div>
+                <hr :class="currentTheme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'" class="my-2">
+                <div class="flex justify-between text-base font-black"><span :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">Amount Due:</span><span class="text-emerald-500">${{ totalPrice.toFixed(2) }}</span></div>
               </div>
 
               <div class="space-y-3">
                 <p class="text-xs font-bold uppercase text-neutral-500 tracking-wider">{{ currentLang === 'EN' ? 'Select Payment Method' : 'ជ្រើសរើសវិធីសាស្ត្របង់ប្រាក់' }}</p>
-                <label v-for="method in ['ABA Pay', 'Wing', 'Visa / Mastercard']" :key="method" class="flex items-center justify-between p-3 rounded-xl border border-neutral-800 bg-[#120d0d] cursor-pointer hover:border-neutral-700 transition-all group">
+                <label 
+                  v-for="method in ['ABA Pay', 'Wing', 'Visa / Mastercard']" 
+                  :key="method" 
+                  class="flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all group"
+                  :class="currentTheme === 'dark' ? 'border-neutral-800 bg-[#120d0d] hover:border-neutral-700' : 'border-gray-200 bg-white hover:border-gray-300'"
+                >
                   <div class="flex items-center gap-3">
                     <input type="radio" name="payment" :value="method" v-model="selectedPayment" class="accent-rose-600 h-4 w-4">
-                    <span class="text-sm font-bold text-neutral-200 group-hover:text-white">{{ method }}</span>
+                    <span class="text-sm font-bold" :class="currentTheme === 'dark' ? 'text-neutral-200 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'">{{ method }}</span>
                   </div>
-                  <span class="text-[10px] px-2 py-0.5 rounded bg-neutral-900 border border-neutral-800 text-neutral-400">Instant</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded border" :class="currentTheme === 'dark' ? 'bg-neutral-900 border-neutral-800 text-neutral-400' : 'bg-gray-100 border-gray-200 text-gray-500'">Instant</span>
                 </label>
               </div>
             </div>
 
-            <div class="mt-8 pt-4 border-t border-neutral-800 flex gap-3 justify-end">
-              <button @click="bookingStep = 'seats'" class="px-5 py-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs font-bold text-neutral-400 hover:text-white transition-all">
+            <div class="mt-8 pt-4 border-t flex gap-3 justify-end" :class="currentTheme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'">
+              <button @click="bookingStep = 'seats'" class="px-5 py-2.5 rounded-xl border text-xs font-bold transition-all" :class="currentTheme === 'dark' ? 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white' : 'bg-white border-gray-300 text-gray-500 hover:text-gray-900'">
                 {{ currentLang === 'EN' ? 'Back to Seats' : 'ត្រឡប់ទៅរើសកៅអី' }}
               </button>
               <button @click="confirmPayment" class="px-8 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-600/10">
@@ -298,17 +356,17 @@
 import { ref, onMounted, computed } from 'vue'
 
 const props = defineProps({
-  currentLang: { type: String, default: 'EN' }
+  currentLang: { type: String, default: 'EN' },
+  currentTheme: { type: String, default: 'dark' } 
 })
 
 const activeTab = ref('now-showing')
 const activeDateIndex = ref(0)
 const currentSlide = ref(0)
 
-// Workflow booking state
 const selectedMovie = ref(null)
 const modalSubTab = ref('showtime')
-const bookingStep = ref('info') // steps: info -> seats -> checkout
+const bookingStep = ref('info')
 const selectedTime = ref('')
 const selectedSeats = ref([])
 const selectedPayment = ref('ABA Pay')
@@ -423,6 +481,7 @@ onMounted(() => {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* Fixed: Closed keyframe scoping properly */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.97); }
   to { opacity: 1; transform: scale(1); }
