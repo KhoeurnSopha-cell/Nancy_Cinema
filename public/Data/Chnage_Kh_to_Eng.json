@@ -1,0 +1,64 @@
+{
+  "translations": {
+    "EN": {
+      "specialOffer": "Special Offer",
+      "newExperience": "New Experience",
+      "limitedTime": "Limited Time",
+      "slide1Title": "Champion Offer On The Way!",
+      "slide1Desc": "Get special combo sets during this football season.",
+      "checkPromo": "Check Promotion",
+      "slide2Title": "Second Slide Promotion",
+      "slide2Desc": "Enjoy an immersive movie experience with new promotions.",
+      "watchNow": "Watch Now",
+      "slide3Title": "Third Slide Promotion",
+      "slide3Desc": "Don’t miss this month’s special offer with big discounts.",
+      "viewDiscount": "View Discounts",
+      "nowShowing": "Now Showing",
+      "comingSoon": "Coming Soon",
+      "noMovies": "No movies available to display"
+    },
+    "KH": {
+      "specialOffer": "ការផ្តល់ជូនពិសេស",
+      "newExperience": "បទពិសោធន៍ថ្មី",
+      "limitedTime": "ពេលវេលាកំណត់",
+      "slide1Title": "ការផ្តល់ជូនជើងឯកហ្វូតបល!",
+      "slide1Desc": "ទទួលបានការថែមជូនឈុត Combo ពិសេសសម្រាប់ការប្រកួតដ៏ជក់ចិត្ត។",
+      "checkPromo": "ពិនិត្យប្រម៉ូសិន",
+      "slide2Title": "ប្រម៉ូសិនស្លាយទីពីរ",
+      "slide2Desc": "រីករាយជាមួយបទពិសោធន៍ទស្សនាភាពយន្តដ៏ជក់ចិត្តជាមួយប្រម៉ូសិនថ្មីៗ។",
+      "watchNow": "ទស្សនាឥឡូវនេះ",
+      "slide3Title": "ប្រម៉ូសិនស្លាយទីបី",
+      "slide3Desc": "កុំរំលងឱកាសពិសេសប្រចាំខែ ជាមួយការបញ្ចុះតម្លៃយ៉ាងច្រើនសន្ធឹកសន្ធាប់។",
+      "viewDiscount": "មើលការបញ្ចុះតម្លៃ",
+      "nowShowing": "កំពុងបញ្ចាំង",
+      "comingSoon": "ឆាប់ៗនេះ",
+      "noMovies": "មិនមានភាពយន្តសម្រាប់បង្ហាញឡើយ"
+    }
+  },
+  "datesData": {
+    "EN": [
+      { "dayName": "Today", "dayNumber": "3", "month": "Jun" },
+      { "dayName": "Thu", "dayNumber": "4", "month": "Jun" },
+      { "dayName": "Fri", "dayNumber": "5", "month": "Jun" },
+      { "dayName": "Sat", "dayNumber": "6", "month": "Jun" },
+      { "dayName": "Sun", "dayNumber": "7", "month": "Jun" },
+      { "dayName": "Mon", "dayNumber": "8", "month": "Jun" }
+    ],
+    "KH": [
+      { "dayName": "ថ្ងៃនេះ", "dayNumber": "3", "month": "មិថុនា" },
+      { "dayName": "ព្រហ", "dayNumber": "4", "month": "មិថុនា" },
+      { "dayName": "សុក្រ", "dayNumber": "5", "month": "មិថុនា" },
+      { "dayName": "សៅរ៍", "dayNumber": "6", "month": "មិថុនា" },
+      { "dayName": "អាទិត្យ", "dayNumber": "7", "month": "មិថុនា" },
+      { "dayName": "ចន្ទ", "dayNumber": "8", "month": "មិថុនា" }
+    ]
+  },
+  "movies": [
+    { "title": { "EN": "Salmokji: Whispering Water", "KH": "បឹងដង្ហោយព្រលឹង" }, "poster": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=500&auto=format&fit=crop", "releaseDate": "28 May 2026", "rating": "R18", "type": "Horror", "status": "now", "showDates": ["3", "4", "5"] },
+    { "title": { "EN": "Don't Bully Me", "KH": "បង្កាធ្មប់" }, "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=500&auto=format&fit=crop", "releaseDate": "28 May 2026", "rating": "R18", "type": "Thriller", "status": "now", "showDates": ["3", "5", "6"] },
+    { "title": { "EN": "Your Final Homework", "KH": "បេះដូងត្រូវជ្រើស" }, "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=500&auto=format&fit=crop", "releaseDate": "27 May 2026", "rating": "G", "type": "Drama", "status": "now", "showDates": ["3", "4", "6", "7"] },
+    { "title": { "EN": "Samakdo", "KH": "កោរសក់កងដឹក" }, "poster": "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=500&auto=format&fit=crop", "releaseDate": "22 May 2026", "rating": "R18", "type": "Horror / Mystery", "status": "now", "showDates": ["3", "4", "5", "8"] },
+    { "title": { "EN": "The Mandalorian and Grogu", "KH": "ដឹ ម៉ានដាឡូរៀន និង ហ្គ្រូហ្គូ" }, "poster": "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=500&auto=format&fit=crop", "releaseDate": "21 May 2026", "rating": "G", "type": "ScreenX / Action", "status": "now", "showDates": ["4", "5", "6"] },
+    { "title": { "EN": "Headless Gangster", "KH": "ក្បាលដាច់ក្បាលងាប់" }, "poster": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=500&auto=format&fit=crop", "releaseDate": "21 May 2026", "rating": "NC15", "type": "Action / Comedy", "status": "now", "showDates": ["5", "6", "7"] }
+  ]
+}
