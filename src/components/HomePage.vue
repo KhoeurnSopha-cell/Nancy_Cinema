@@ -154,14 +154,14 @@
         :class="currentTheme === 'dark' ? 'bg-[#0f0a0a] border-neutral-800' : 'bg-white border-neutral-300 text-gray-800'"
       >
         
-        <button @click="closeMovieDetail" class="absolute top-4 right-4 z-50 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white/80 hover:text-white hover:bg-rose-600 transition-colors">
+        <button @click="closeMovieDetail" class="absolute top-4 right-4 z-50 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white/80 hover:text-white hover:bg-rose-600 transition-colors mt-5">
           <span class="text-xl font-bold">&times;</span>
         </button>
 
         <div v-if="bookingStep !== 'success-receipt'" class="relative w-full md:w-2/5 aspect-[2/3] md:aspect-auto md:h-[550px]">
           <img :src="selectedMovie.poster" class="w-full h-full object-cover" :alt="selectedMovie.title[currentLang]">
           <div 
-            class="absolute inset-0 transition-all duration-300"
+            class="absolute inset-0 transition-all duration-300 "
             :class="currentTheme === 'dark' 
               ? 'bg-gradient-to-t md:bg-gradient-to-r from-[#0f0a0a] via-transparent to-transparent' 
               : 'bg-gradient-to-t md:bg-gradient-to-r from-white via-transparent to-transparent'"
@@ -169,7 +169,7 @@
         </div>
 
         <div 
-          class="w-full p-6 md:p-8 flex flex-col justify-between" 
+          class="w-full p-6 md:p-8 flex flex-col justify-between " 
           :class="[
             bookingStep !== 'success-receipt' ? 'md:w-3/5' : 'w-full',
             currentTheme === 'dark' ? 'bg-gradient-to-b from-transparent to-[#0a0505]' : 'bg-gradient-to-b from-transparent to-gray-50'
@@ -431,7 +431,7 @@
             </div>
           </div>
 
-          <div v-if="bookingStep === 'success-receipt'" class="w-full animate-fadeIn flex flex-col items-center">
+          <div v-if="bookingStep === 'success-receipt'" class="w-full animate-fadeIn flex flex-col items-center mt-40">
             <div class="w-full max-w-sm bg-[#120d0d] border border-neutral-800/80 rounded-2xl p-6 shadow-2xl relative text-center">
               <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-600 text-[9px] text-white px-3 py-0.5 rounded-full uppercase tracking-widest font-black">
                 Success
