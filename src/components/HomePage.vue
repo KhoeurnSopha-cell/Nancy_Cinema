@@ -3,7 +3,6 @@
     class="w-full min-h-screen font-sans selection:bg-rose-600 selection:text-white antialiased transition-colors duration-300"
     :class="currentTheme === 'dark' ? 'bg-[#0b0b0b] text-gray-200' : 'bg-gray-50 text-gray-800'"
   >
-
     <div class="w-full mx-auto relative group">
       <div class="relative shadow-2xl overflow-hidden aspect-[16/9] md:aspect-[21/9] w-full max-h-[550px] bg-black">
         
@@ -92,7 +91,6 @@
             @click="openMovieDetail(movie)"
             class="flex flex-col group/card cursor-pointer relative"
           >
-            
             <div 
               class="relative aspect-[2/3] w-full rounded-xl overflow-hidden shadow-xl border transition-colors duration-300"
               :class="currentTheme === 'dark' ? 'border-neutral-800/50 bg-[#141414]' : 'border-neutral-200 bg-gray-200'"
@@ -142,7 +140,6 @@
                 <span class="text-xs text-neutral-500 font-medium ml-1">{{ movie.type }}</span>
               </div>
             </div>
-
           </div>
         </template>
         <div v-else class="col-span-full py-12 text-center text-sm text-neutral-500">
@@ -161,7 +158,7 @@
           <span class="text-xl font-bold">&times;</span>
         </button>
 
-        <div v-if="bookingStep === 'info'" class="relative w-full md:w-2/5 aspect-[2/3] md:aspect-auto md:h-[550px]">
+        <div v-if="bookingStep !== 'success-receipt'" class="relative w-full md:w-2/5 aspect-[2/3] md:aspect-auto md:h-[550px]">
           <img :src="selectedMovie.poster" class="w-full h-full object-cover" :alt="selectedMovie.title[currentLang]">
           <div 
             class="absolute inset-0 transition-all duration-300"
@@ -174,16 +171,13 @@
         <div 
           class="w-full p-6 md:p-8 flex flex-col justify-between" 
           :class="[
-            bookingStep === 'info' ? 'md:w-3/5' : 'w-full',
+            bookingStep !== 'success-receipt' ? 'md:w-3/5' : 'w-full',
             currentTheme === 'dark' ? 'bg-gradient-to-b from-transparent to-[#0a0505]' : 'bg-gradient-to-b from-transparent to-gray-50'
           ]"
         >
           
           <div v-if="bookingStep === 'info'">
-            <h3 
-              class="text-2xl md:text-3xl font-black tracking-wide mb-6"
-              :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'"
-            >
+            <h3 class="text-2xl md:text-3xl font-black tracking-wide mb-6" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">
               {{ selectedMovie.title[currentLang] }}
             </h3>
 
@@ -206,7 +200,7 @@
               </div>
             </div>
 
-            <div class="mt-8 border-t pt-6" :class="currentTheme === 'dark' ? 'border-neutral-800/80' : 'border-neutral-200'">
+            <div class="mt-8 pt-6 border-t" :class="currentTheme === 'dark' ? 'border-neutral-800/80' : 'border-neutral-200'">
               <div class="flex gap-6 border-b pb-2" :class="currentTheme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'">
                 <button @click="modalSubTab = 'showtime'" class="text-base font-black uppercase tracking-wider pb-2 transition-colors relative" :class="modalSubTab === 'showtime' ? 'text-rose-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-rose-600' : 'text-neutral-500 hover:text-neutral-400'">
                   {{ currentLang === 'EN' ? 'Showtime' : 'ម៉ោងបញ្ចាំង' }}
@@ -232,7 +226,7 @@
                   </div>
                 </div>
                 <div v-else class="text-xs leading-relaxed animate-fadeIn" :class="currentTheme === 'dark' ? 'text-neutral-400' : 'text-gray-600'">
-                  {{ selectedMovie.title[currentLang] }} {{ currentLang === 'EN' ? 'is an incredible cinematic experience. Watch the exclusive visual screening at Legend Cinema with standard configurations.' : 'គឺជាភាពយន្តដ៏អស្ចារ្យដែលអ្នកមិនគួររំលង។ រីករាយទស្សនាជាមួយគុណភាពរូបភាពច្បាស់ត្រជាក់ភ្នែកនៅ Legend Cinema។' }}
+                  {{ selectedMovie.title[currentLang] }} {{ currentLang === 'EN' ? 'is an incredible cinematic experience.' : 'គឺជាភាពយន្តដ៏អស្ចារ្យដែលអ្នកមិនគួររំលង។' }}
                 </div>
               </div>
             </div>
@@ -306,10 +300,7 @@
             </h4>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div 
-                class="border rounded-xl p-4 space-y-3"
-                :class="currentTheme === 'dark' ? 'bg-neutral-900/40 border-neutral-800/60' : 'bg-gray-50 border-gray-200'"
-              >
+              <div class="border rounded-xl p-4 space-y-3" :class="currentTheme === 'dark' ? 'bg-neutral-900/40 border-neutral-800/60' : 'bg-gray-50 border-gray-200'">
                 <p class="text-xs font-bold uppercase text-neutral-500 tracking-wider">{{ currentLang === 'EN' ? 'Order Summary' : 'សេចក្តីសង្ខេបការបញ្ជាទិញ' }}</p>
                 <div class="flex justify-between text-sm"><span class="text-neutral-400">Movie:</span><span class="font-bold" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">{{ selectedMovie.title[currentLang] }}</span></div>
                 <div class="flex justify-between text-sm"><span class="text-neutral-400">Schedule:</span><span :class="currentTheme === 'dark' ? 'text-neutral-200' : 'text-gray-700'">{{ selectedTime }} | Day {{ currentDates[activeDateIndex].dayNumber }}</span></div>
@@ -318,29 +309,159 @@
                 <div class="flex justify-between text-base font-black"><span :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">Amount Due:</span><span class="text-emerald-500">${{ totalPrice.toFixed(2) }}</span></div>
               </div>
 
-              <div class="space-y-3">
-                <p class="text-xs font-bold uppercase text-neutral-500 tracking-wider">{{ currentLang === 'EN' ? 'Select Payment Method' : 'ជ្រើសរើសវិធីសាស្ត្របង់ប្រាក់' }}</p>
-                <label 
-                  v-for="method in ['ABA Pay', 'Wing', 'Visa / Mastercard']" 
-                  :key="method" 
-                  class="flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all group"
-                  :class="currentTheme === 'dark' ? 'border-neutral-800 bg-[#120d0d] hover:border-neutral-700' : 'border-gray-200 bg-white hover:border-gray-300'"
-                >
-                  <div class="flex items-center gap-3">
-                    <input type="radio" name="payment" :value="method" v-model="selectedPayment" class="accent-rose-600 h-4 w-4">
-                    <span class="text-sm font-bold" :class="currentTheme === 'dark' ? 'text-neutral-200 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'">{{ method }}</span>
-                  </div>
-                  <span class="text-[10px] px-2 py-0.5 rounded border" :class="currentTheme === 'dark' ? 'bg-neutral-900 border-neutral-800 text-neutral-400' : 'bg-gray-100 border-gray-200 text-gray-500'">Instant</span>
-                </label>
+              <div class="flex flex-col items-center justify-center border rounded-xl p-4 transition-all" :class="currentTheme === 'dark' ? 'bg-[#120d0d] border-neutral-800' : 'bg-white border-gray-200'">
+                <p class="text-xs font-bold uppercase text-neutral-500 tracking-wider mb-3">Scan to Pay via {{ selectedPayment }}</p>
+                
+                <div class="p-3 bg-white rounded-lg shadow-inner relative group">
+                  <img 
+                    :src="selectedPayment === 'ABA Pay' ? 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ABAPAY_DEMO_TOTAL_' + totalPrice : 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=WING_DEMO_TOTAL_' + totalPrice" 
+                    class="w-[160px] h-[160px] object-contain" 
+                    alt="Payment QR Code"
+                  >
+                </div>
+                
+                <div class="flex gap-2 mt-4 w-full">
+                  <button 
+                    v-for="method in ['ABA Pay', 'Wing']" 
+                    :key="method"
+                    @click="selectedPayment = method"
+                    class="flex-1 py-1.5 text-[11px] font-bold border rounded-lg transition-all"
+                    :class="selectedPayment === method ? 'bg-rose-600 text-white border-rose-600 shadow-md' : (currentTheme === 'dark' ? 'bg-neutral-900 border-neutral-800 text-neutral-400' : 'bg-gray-100 border-gray-300 text-gray-600')"
+                  >
+                    {{ method }}
+                  </button>
+                </div>
               </div>
             </div>
 
             <div class="mt-8 pt-4 border-t flex gap-3 justify-end" :class="currentTheme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'">
               <button @click="bookingStep = 'seats'" class="px-5 py-2.5 rounded-xl border text-xs font-bold transition-all" :class="currentTheme === 'dark' ? 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white' : 'bg-white border-gray-300 text-gray-500 hover:text-gray-900'">
-                {{ currentLang === 'EN' ? 'Back to Seats' : 'ត្រឡប់ទៅរើសកៅអី' }}
+                {{ currentLang === 'EN' ? 'Back' : 'ថយក្រោយ' }}
               </button>
-              <button @click="confirmPayment" class="px-8 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-600/10">
-                {{ currentLang === 'EN' ? 'Pay Now' : 'បង់ប្រាក់ឥឡូវនេះ' }}
+              <button @click="goToUploadStep" class="px-8 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-600/10">
+                {{ currentLang === 'EN' ? 'Pay Finish' : 'បង់ប្រាក់រួចរាល់' }}
+              </button>
+            </div>
+          </div>
+
+          <div v-if="bookingStep === 'success'" class="w-full animate-fadeIn flex flex-col items-center py-4">
+            <div class="text-center mb-6">
+              <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto text-xl mb-3 border border-emerald-500/30">✓</div>
+              <h4 class="text-xl font-extrabold tracking-wide" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">
+                {{ currentLang === 'EN' ? 'Upload Payment Receipt' : 'ផ្ញើភស្តុតាងការបង់ប្រាក់' }}
+              </h4>
+              <p class="text-xs text-neutral-400 mt-1.5 max-w-xs mx-auto leading-relaxed">
+                {{ currentLang === 'EN' ? 'Please provide the transaction receipt to verify your seats.' : 'សូមផ្តល់វិក្កយបត្រប្រតិបត្តិការដើម្បីផ្ទៀងផ្ទាត់កៅអីរបស់អ្នក។' }}
+              </p>
+            </div>
+
+            <div class="w-full max-w-[420px] space-y-5">
+              
+              <input 
+                type="file" 
+                ref="galleryInputRef" 
+                accept="image/*" 
+                class="hidden" 
+                @change="handleAlbumFilePick"
+              />
+
+              <div 
+                class="w-full h-56 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center p-3 relative overflow-hidden transition-all duration-300"
+                :class="[
+                  previewReceiptUrl 
+                    ? 'border-emerald-500/50 bg-black/40' 
+                    : (currentTheme === 'dark' ? 'border-neutral-800 bg-[#141010]' : 'border-gray-300 bg-gray-50')
+                ]"
+              >
+                <img 
+                  v-if="previewReceiptUrl" 
+                  :src="previewReceiptUrl" 
+                  class="w-full h-full object-contain z-10 rounded-xl" 
+                  alt="Receipt Preview" 
+                />
+                
+                <div v-else class="text-center space-y-3 pointer-events-none flex flex-col items-center">
+                  <span class="text-3xl text-neutral-600 opacity-80">📁</span>
+                  <p class="text-xs font-bold text-neutral-500 tracking-wide">
+                    {{ currentLang === 'EN' ? 'No image selected yet' : 'មិនទាន់មានរូបភាពជ្រើសរើសឡើយ' }}
+                  </p>
+                </div>
+
+                <button 
+                  v-if="previewReceiptUrl" 
+                  @click="resetCaptureState" 
+                  class="absolute top-3 right-3 z-30 px-2.5 py-1 rounded-md bg-neutral-900/90 hover:bg-red-600 text-white border border-neutral-700/60 text-[10px] font-black uppercase tracking-wider transition-colors backdrop-blur-sm"
+                >
+                  {{ currentLang === 'EN' ? 'Remove' : 'លុបចេញ' }}
+                </button>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3.5">
+                <button 
+                  @click="handleTakePhotoAction" 
+                  class="py-3 px-4 rounded-xl bg-[#e50914] text-white text-xs font-black uppercase tracking-widest hover:bg-red-700 transition-all active:scale-[0.98] shadow-lg shadow-red-600/10 flex items-center justify-center gap-2 border border-red-500/20"
+                >
+                   {{ currentLang === 'EN' ? 'Take Photo' : 'ថតវិក្កយបត្រ' }}
+                </button>
+                
+                <button 
+                  @click="triggerGalleryPicker" 
+                  class="py-3 px-4 rounded-xl border font-black text-xs uppercase tracking-widest transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                  :class="currentTheme === 'dark' ? 'bg-[#1a1515] border-neutral-800 text-neutral-200 hover:bg-neutral-800 hover:text-white' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'"
+                >
+                   {{ currentLang === 'EN' ? 'Open Album' : 'ជ្រើសពី Album' }}
+                </button>
+              </div>
+
+              <button 
+                :disabled="!uploadedFileRaw || isSubmitting"
+                @click="submitBookingWithProof" 
+                class="w-full mt-4 py-3.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-md active:scale-[0.99] flex items-center justify-center gap-2"
+                :class="[
+                  uploadedFileRaw && !isSubmitting
+                    ? 'bg-emerald-600 text-white hover:bg-emerald-500 shadow-emerald-600/20 cursor-pointer' 
+                    : 'bg-[#162721] text-neutral-500 cursor-not-allowed border border-emerald-950/40'
+                ]"
+              >
+                <span v-if="isSubmitting" class="w-4 h-4 border-2 border-neutral-500 border-t-white rounded-full animate-spin"></span>
+                <span>
+                  {{ isSubmitting ? 'Processing...' : (currentLang === 'EN' ? 'Submit Verification' : 'បញ្ជូនភស្តុតាងទៅកាន់ហាង') }}
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div v-if="bookingStep === 'success-receipt'" class="w-full animate-fadeIn flex flex-col items-center">
+            <div class="w-full max-w-sm bg-[#120d0d] border border-neutral-800/80 rounded-2xl p-6 shadow-2xl relative text-center">
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-600 text-[9px] text-white px-3 py-0.5 rounded-full uppercase tracking-widest font-black">
+                Success
+              </div>
+              
+              <h4 class="text-rose-500 text-xl font-black uppercase tracking-widest mt-2">NANCY CINEMA</h4>
+              <p class="text-[10px] uppercase text-neutral-500 tracking-wider font-bold mt-0.5">Electronic Booking Receipt</p>
+              
+              <div class="mt-6 space-y-3.5 text-left text-xs border-t border-dashed border-neutral-800 pt-5">
+                <div class="flex justify-between"><span class="text-neutral-400">Movie:</span><span class="font-bold text-white">{{ selectedMovie?.title[currentLang] }}</span></div>
+                <div class="flex justify-between"><span class="text-neutral-400">Date/Time:</span><span class="text-neutral-200">{{ selectedTime }} | Day {{ currentDates[activeDateIndex].dayNumber }} {{ currentDates[activeDateIndex].month }}</span></div>
+                <div class="flex justify-between"><span class="text-neutral-400">Seats:</span><span class="font-black text-rose-500">{{ selectedSeats.map(s => s.id).join(', ') }}</span></div>
+                <div class="flex justify-between"><span class="text-neutral-400">Payment:</span><span class="text-emerald-400 font-bold">{{ selectedPayment }} (Paid)</span></div>
+                <div class="flex justify-between"><span class="text-neutral-400">Invoice ID:</span><span class="text-neutral-400 font-mono">#NC-{{ generatedInvoiceId }}</span></div>
+              </div>
+
+              <div class="mt-6 border-t border-dashed border-neutral-800 pt-4 flex justify-between items-center">
+                <span class="text-sm font-black text-white">Total Paid:</span>
+                <span class="text-xl font-black text-emerald-400">${{ totalPrice.toFixed(2) }}</span>
+              </div>
+              
+              <p class="text-[9px] uppercase tracking-widest text-neutral-500 font-bold mt-6">Thank you & Enjoy your movie</p>
+            </div>
+
+            <div class="w-full max-w-sm flex flex-col gap-3 mt-6">
+              <button @click="closeMovieDetail" class="w-full py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-rose-600/20">
+                 Save Receipt (Download)
+              </button>
+              <button @click="closeMovieDetail" class="w-full py-3 rounded-xl bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white text-xs font-black uppercase tracking-widest transition-all">
+                 Back to Home
               </button>
             </div>
           </div>
@@ -349,27 +470,81 @@
       </div>
     </div>
 
+    <div v-if="isWebcamActive" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-fadeIn">
+      <div class="w-full max-w-md bg-[#121212] border border-neutral-800 rounded-2xl p-5 shadow-2xl flex flex-col items-center">
+        <h5 class="text-sm font-black text-neutral-200 uppercase tracking-widest mb-4 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Laptop Webcam Stream
+        </h5>
+        
+        <div class="w-full aspect-video bg-black border border-neutral-800 rounded-xl overflow-hidden relative shadow-inner">
+          <video ref="videoStreamRef" autoplay playsinline class="w-full h-full object-cover"></video>
+        </div>
+        
+        <div class="flex gap-3 mt-5 w-full">
+          <button @click="stopWebcamStream" class="flex-1 py-2.5 rounded-xl border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-white text-xs font-bold uppercase tracking-wider transition-colors">
+            {{ currentLang === 'EN' ? 'Cancel' : 'បោះបង់' }}
+          </button>
+          <button @click="captureWebcamSnapshot" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black uppercase tracking-widest transition-colors shadow-lg shadow-emerald-600/10">
+             Capture Photo
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue' 
+import { db } from '@/firebase/config' 
+import { doc, updateDoc, onSnapshot, setDoc, collection, getDocs, addDoc } from 'firebase/firestore' 
+import { useBookingStore } from '@/stores/booking'
+import { getAuth } from 'firebase/auth' 
+
+const bookingStore = useBookingStore()
+const auth = getAuth() 
 
 const props = defineProps({
   currentLang: { type: String, default: 'EN' },
   currentTheme: { type: String, default: 'dark' } 
 })
 
+const TELEGRAM_BOT_TOKEN = '8982300148:AAHgxkCZaJye9ZL1HgQOsMYMxUUXormKzyQ'
+const TELEGRAM_CHAT_ID = '5881662338' 
+
 const activeTab = ref('now-showing')
 const activeDateIndex = ref(0)
 const currentSlide = ref(0)
 
-const selectedMovie = ref(null)
+// ភ្ជាប់ selectedMovie ទៅកាន់ Pinia Store ផ្ទាល់
+const selectedMovie = computed({
+  get: () => bookingStore.selectedMovie,
+  set: (val) => { bookingStore.selectedMovie = val }
+})
+
+// មុខងារ Watch សម្រាប់ចាប់សញ្ញាស្ដាប់ការចុចភាពយន្តចេញពី Search Navbar ដើម្បីបើកផ្ទាំង Detail ភ្លាមៗ
+watch(() => bookingStore.selectedMovie, (newMovie) => {
+  if (newMovie) {
+    modalSubTab.value = 'showtime'  
+    bookingStep.value = 'info'      
+    selectedSeats.value = []        
+  }
+})
+
 const modalSubTab = ref('showtime')
 const bookingStep = ref('info')
 const selectedTime = ref('')
 const selectedSeats = ref([])
 const selectedPayment = ref('ABA Pay')
+const generatedInvoiceId = ref('')
+const isSubmitting = ref(false)
+
+const galleryInputRef = ref(null)
+const videoStreamRef = ref(null)
+const isWebcamActive = ref(false)
+const previewReceiptUrl = ref(null)
+const uploadedFileRaw = ref(null)
+let localMediaStreamInstance = null
 
 const topSlides = [
   { img: 'https://media-legend.sgp1.digitaloceanspaces.com/legend-prod/8d27a816-0082-4580-810a-a148a26950d0.jpeg', alt: 'Promo 1' },
@@ -385,42 +560,29 @@ const t = computed(() => translations[props.currentLang])
 
 const datesData = {
   EN: [
-    { dayName: 'Today', dayNumber: '3', month: 'Jun' },
-    { dayName: 'Thu', dayNumber: '4', month: 'Jun' },
-    { dayName: 'Fri', dayNumber: '5', month: 'Jun' },
-    { dayName: 'Sat', dayNumber: '6', month: 'Jun' },
-    { dayName: 'Sun', dayNumber: '7', month: 'Jun' },
-    { dayName: 'Mon', dayNumber: '8', month: 'Jun' }
+    { dayName: 'Today', dayNumber: '13', month: 'Jun' },
+    { dayName: 'Sun', dayNumber: '14', month: 'Jun' },
+    { dayName: 'Mon', dayNumber: '15', month: 'Jun' },
+    { dayName: 'Tue', dayNumber: '16', month: 'Jun' },
+    { dayName: 'Wed', dayNumber: '17', month: 'Jun' },
+    { dayName: 'Thu', dayNumber: '18', month: 'Jun' }
   ],
   KH: [
-    { dayName: 'ថ្ងៃនេះ', dayNumber: '3', month: 'មិថុនា' },
-    { dayName: 'ព្រហ', dayNumber: '4', month: 'មិថុនា' },
-    { dayName: 'សុក្រ', dayNumber: '5', month: 'មិថុនា' },
-    { dayName: 'សៅរ៍', dayNumber: '6', month: 'មិថុនា' },
-    { dayName: 'អាទិត្យ', dayNumber: '7', month: 'មិថុនា' },
-    { dayName: 'ចន្ទ', dayNumber: '8', month: 'មិថុនា' }
+    { dayName: 'ថ្ងៃនេះ', dayNumber: '13', month: 'មិថុនា' },
+    { dayName: 'អាទិត្យ', dayNumber: '14', month: 'មិថុនា' },
+    { dayName: 'ចន្ទ', dayNumber: '15', month: 'មិថុនា' },
+    { dayName: 'អង្គារ', dayNumber: '16', month: 'មិថុនា' },
+    { dayName: 'ពុធ', dayNumber: '17', month: 'មិថុនា' },
+    { dayName: 'ព្រហ', dayNumber: '18', month: 'មិថុនា' }
   ]
 }
 
 const currentDates = computed(() => datesData[props.currentLang])
+const seatPlan = ref([])
+const movies = ref([]) 
 
-const seatPlan = ref([
-  { rowName: 'A', seats: [{ id: 'A1', num: 1, type: 'Regular', isTaken: false }, { id: 'A2', num: 2, type: 'Regular', isTaken: true }, { id: 'A3', num: 3, type: 'Regular', isTaken: false }, { id: 'A4', num: 4, type: 'Regular', isTaken: false }, { id: 'A5', num: 5, type: 'Regular', isTaken: false }, { id: 'A6', num: 6, type: 'Regular', isTaken: true }] },
-  { rowName: 'B', seats: [{ id: 'B1', num: 1, type: 'Regular', isTaken: false }, { id: 'B2', num: 2, type: 'Regular', isTaken: false }, { id: 'B3', num: 3, type: 'Regular', isTaken: false }, { id: 'B4', num: 4, type: 'Regular', isTaken: true }, { id: 'B5', num: 5, type: 'Regular', isTaken: false }, { id: 'B6', num: 6, type: 'Regular', isTaken: false }] },
-  { rowName: 'C', seats: [{ id: 'C1', num: 1, type: 'Regular', isTaken: false }, { id: 'C2', num: 2, type: 'Regular', isTaken: false }, { id: 'C3', num: 3, type: 'Regular', isTaken: false }, { id: 'C4', num: 4, type: 'Regular', isTaken: false }, { id: 'C5', num: 5, type: 'Regular', isTaken: false }, { id: 'C6', num: 6, type: 'Regular', isTaken: false }] },
-  { rowName: 'D', seats: [{ id: 'D1', num: 1, type: 'VIP', isTaken: false }, { id: 'D2', num: 2, type: 'VIP', isTaken: false }, { id: 'D3', num: 3, type: 'VIP', isTaken: true }, { id: 'D4', num: 4, type: 'VIP', isTaken: false }, { id: 'D5', num: 5, type: 'VIP', isTaken: false }, { id: 'D6', num: 6, type: 'VIP', isTaken: false }] },
-  { rowName: 'E', seats: [{ id: 'E1', num: 1, type: 'VIP', isTaken: false }, { id: 'E2', num: 2, type: 'VIP', isTaken: false }, { id: 'E3', num: 3, type: 'VIP', isTaken: false }, { id: 'E4', num: 4, type: 'VIP', isTaken: false }, { id: 'E5', num: 5, type: 'VIP', isTaken: false }, { id: 'E6', num: 6, type: 'VIP', isTaken: false }] }
-])
-
-const movies = ref([
-  { title: { EN: "Salmokji: Whispering Water", KH: "បឹងដង្ហោយព្រលឹង" }, poster: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=500&auto=format&fit=crop", releaseDate: "28 May 2026", duration: "1h 36min", rating: "R18", type: "Horror / Thriller", formats: ["2D", "VIP"], status: "now", showDates: ["3", "4", "5"] },
-  { title: { EN: "Don't Bully Me", KH: "បង្កាធ្មប់" }, poster: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=500&auto=format&fit=crop", releaseDate: "28 May 2026", duration: "1h 52min", rating: "R18", type: "Thriller", formats: ["2D"], status: "now", showDates: ["3", "5", "6"] },
-  { title: { EN: "Your Final Homework", KH: "បេះដូងត្រូវជ្រើស" }, poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=500&auto=format&fit=crop", releaseDate: "27 May 2026", duration: "2h 05min", rating: "G", type: "Drama", formats: ["2D"], status: "now", showDates: ["3", "4", "6", "7"] },
-  { title: { EN: "Samakdo", KH: "កោរសក់កងដឹក" }, poster: "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=500&auto=format&fit=crop", releaseDate: "22 May 2026", duration: "1h 48min", rating: "R18", type: "Horror / Mystery", formats: ["2D", "ATMOS"], status: "now", showDates: ["3", "4", "5", "8"] },
-  { title: { EN: "The Mandalorian and Grogu", KH: "ដឹ ម៉ានដាឡូរៀន និង ហ្គ្រូហ្គូ" }, poster: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=500&auto=format&fit=crop", releaseDate: "21 May 2026", duration: "2h 12min", rating: "G", type: "Action / Sci-Fi", formats: ["ScreenX", "3D"], status: "now", showDates: ["4", "5", "6"] },
-  { title: { EN: "Headless Gangster", KH: "ក្បាលដាច់ក្បាលងាប់" }, poster: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=500&auto=format&fit=crop", releaseDate: "21 May 2026", duration: "1h 40min", rating: "NC15", type: "Action / Comedy", formats: ["2D"], status: "now", showDates: ["5", "6", "7"] }
-])
-
+// 🔥 បានកែសម្រួលត្រង់នេះ ដើម្បីឱ្យសុវត្ថិភាពខ្ពស់ និងមិនមានបញ្ហា No Movies
+// សូមកែសម្រួលផ្នែកនេះនៅក្នុង HomePage.vue
 const filteredMovies = computed(() => {
   if (activeTab.value === 'coming-soon') {
     return movies.value.filter(movie => movie.status === 'soon')
@@ -430,8 +592,29 @@ const filteredMovies = computed(() => {
   }
 })
 
+
+const fetchMovies = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, 'movies'))
+    movies.value = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }))
+  } catch (error) {
+    console.error("មានបញ្ហាក្នុងការទាញយក:", error)
+  }
+}
+
 const totalPrice = computed(() => {
   return selectedSeats.value.reduce((sum, seat) => sum + (seat.type === 'VIP' ? 6.00 : 4.00), 0)
+})
+
+const documentId = computed(() => {
+  if (!selectedMovie.value || !selectedTime.value) return ''
+  const movieSlug = selectedMovie.value.title.EN.toLowerCase().replace(/[^a-z0-9]/g, '-')
+  const day = currentDates.value[activeDateIndex.value].dayNumber
+  const timeSlug = selectedTime.value.toLowerCase().replace(/[^a-z0-9]/g, '-')
+  return `${movieSlug}-day-${day}-${timeSlug}`
 })
 
 const selectDate = (index) => { activeDateIndex.value = index }
@@ -445,15 +628,46 @@ const openMovieDetail = (movie, initialTab = 'showtime') => {
 }
 
 const closeMovieDetail = () => {
-  selectedMovie.value = null
+  selectedMovie.value = null 
   selectedTime.value = ''
   selectedSeats.value = []
+  resetCaptureState()
+  if (unsubscribeFirestore) unsubscribeFirestore()
 }
+
+const generateDefaultSeats = () => {
+  return [
+    { rowName: 'A', seats: [{ id: 'A1', num: 1, type: 'Regular', isTaken: false }, { id: 'A2', num: 2, type: 'Regular', isTaken: false }, { id: 'A3', num: 3, type: 'Regular', isTaken: false }, { id: 'A4', num: 4, type: 'Regular', isTaken: false }, { id: 'A5', num: 5, type: 'Regular', isTaken: false }, { id: 'A6', num: 6, type: 'Regular', isTaken: false }] },
+    { rowName: 'B', seats: [{ id: 'B1', num: 1, type: 'Regular', isTaken: false }, { id: 'B2', num: 2, type: 'Regular', isTaken: false }, { id: 'B3', num: 3, type: 'Regular', isTaken: false }, { id: 'B4', num: 4, type: 'Regular', isTaken: false }, { id: 'B5', num: 5, type: 'Regular', isTaken: false }, { id: 'B6', num: 6, type: 'Regular', isTaken: false }] },
+    { rowName: 'C', seats: [{ id: 'C1', num: 1, type: 'Regular', isTaken: false }, { id: 'C2', num: 2, type: 'Regular', isTaken: false }, { id: 'C3', num: 3, type: 'Regular', isTaken: false }, { id: 'C4', num: 4, type: 'Regular', isTaken: false }, { id: 'C5', num: 5, type: 'Regular', isTaken: false }, { id: 'C6', num: 6, type: 'Regular', isTaken: false }] },
+    { rowName: 'D', seats: [{ id: 'D1', num: 1, type: 'VIP', isTaken: false }, { id: 'D2', num: 2, type: 'VIP', isTaken: false }, { id: 'D3', num: 3, type: 'VIP', isTaken: false }, { id: 'D4', num: 4, type: 'VIP', isTaken: false }, { id: 'D5', num: 5, type: 'VIP', isTaken: false }, { id: 'D6', num: 6, type: 'VIP', isTaken: false }] },
+    { rowName: 'E', seats: [{ id: 'E1', num: 1, type: 'VIP', isTaken: false }, { id: 'E2', num: 2, type: 'VIP', isTaken: false }, { id: 'E3', num: 3, type: 'VIP', isTaken: false }, { id: 'E4', num: 4, type: 'VIP', isTaken: false }, { id: 'E5', num: 5, type: 'VIP', isTaken: false }, { id: 'E6', num: 6, type: 'VIP', isTaken: false }] }
+  ]
+}
+
+let unsubscribeFirestore = null
 
 const selectShowtime = (time) => {
   selectedTime.value = time
   bookingStep.value = 'seats'
 }
+
+watch(documentId, (newDocId) => {
+  if (!newDocId) return
+  if (unsubscribeFirestore) unsubscribeFirestore()
+
+  const docRef = doc(db, 'showtimes_seats', newDocId)
+  
+  unsubscribeFirestore = onSnapshot(docRef, async (docSnap) => {
+    if (docSnap.exists()) {
+      seatPlan.value = docSnap.data().seats
+    } else {
+      const initialSeats = generateDefaultSeats()
+      await setDoc(docRef, { seats: initialSeats })
+      seatPlan.value = initialSeats
+    }
+  })
+})
 
 const toggleSeat = (seat) => {
   const seatIdx = selectedSeats.value.findIndex(s => s.id === seat.id)
@@ -464,16 +678,186 @@ const toggleSeat = (seat) => {
   }
 }
 
-const confirmPayment = () => {
-  alert(props.currentLang === 'EN' 
-    ? `Booking Successfully via ${selectedPayment.value}! Amount Paid: $${totalPrice.value.toFixed(2)}` 
-    : `ការទូទាត់ប្រាក់បានជោគជ័យតាមរយៈ ${selectedPayment.value}! ចំនួនទឹកប្រាក់៖ $${totalPrice.value.toFixed(2)}`
-  )
-  closeMovieDetail()
+const goToUploadStep = () => { bookingStep.value = 'success' }
+
+const handleTakePhotoAction = () => {
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  if (isMobile) {
+    if (galleryInputRef.value) {
+      galleryInputRef.value.setAttribute('capture', 'environment')
+      galleryInputRef.value.click()
+    }
+  } else {
+    startDeviceCamera()
+  }
 }
 
+const triggerGalleryPicker = () => {
+  if (galleryInputRef.value) {
+    galleryInputRef.value.removeAttribute('capture')
+    galleryInputRef.value.click()
+  }
+}
+
+const startDeviceCamera = async () => {
+  resetCaptureState()
+  isWebcamActive.value = true
+  try {
+    const constraints = { video: { facingMode: { ideal: "environment" } }, audio: false }
+    const stream = await navigator.mediaDevices.getUserMedia(constraints)
+    localMediaStreamInstance = stream
+    if (videoStreamRef.value) videoStreamRef.value.srcObject = stream
+  } catch (error) {
+    console.error("Error accessing camera API:", error)
+    isWebcamActive.value = false
+  }
+}
+
+const captureWebcamSnapshot = () => {
+  if (!videoStreamRef.value || !localMediaStreamInstance) return
+  const video = videoStreamRef.value
+  const canvas = document.createElement('canvas')
+  canvas.width = video.videoWidth
+  canvas.height = video.videoHeight
+  const ctx = canvas.getContext('2d')
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+  
+  const dataUrl = canvas.toDataURL('image/png')
+  previewReceiptUrl.value = dataUrl
+  canvas.toBlob((blob) => { uploadedFileRaw.value = blob }, 'image/png')
+  stopWebcamStream()
+}
+
+const handleAlbumFilePick = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    uploadedFileRaw.value = file
+    previewReceiptUrl.value = URL.createObjectURL(file)
+  }
+}
+
+const stopWebcamStream = () => {
+  if (localMediaStreamInstance) {
+    localMediaStreamInstance.getTracks().forEach(track => track.stop())
+    localMediaStreamInstance = null
+  }
+  isWebcamActive.value = false
+}
+
+const resetCaptureState = () => {
+  stopWebcamStream()
+  if (previewReceiptUrl.value && !previewReceiptUrl.value.startsWith('data:')) {
+    URL.revokeObjectURL(previewReceiptUrl.value)
+  }
+  previewReceiptUrl.value = null
+  uploadedFileRaw.value = null
+  if (galleryInputRef.value) galleryInputRef.value.value = ''
+}
+
+const submitBookingWithProof = async () => {
+  if (!uploadedFileRaw.value || isSubmitting.value) return
+  
+  isSubmitting.value = true
+  generatedInvoiceId.value = Math.floor(10000 + Math.random() * 90000).toString()
+
+  try {
+    const dateObj = currentDates.value[activeDateIndex.value]
+    const seatListStr = selectedSeats.value.map(s => s.id).join(', ')
+    
+    let telegramMarkdownMessage = `🔔 *NEW BOOKING VERIFICATION PENDING* \n\n` +
+      `🆔 *Invoice ID:* #NC-${generatedInvoiceId.value}\n` +
+      `🎬 *Movie Name:* ${selectedMovie.value.title.EN}\n` +
+      `📅 *Schedule:* ${selectedTime.value} | Day ${dateObj.dayNumber} ${dateObj.month}\n` +
+      `💺 *Selected Seats:* ${seatListStr}\n` +
+      `💵 *Total Amount:* $${totalPrice.value.toFixed(2)}\n` +
+      `💳 *Payment Method:* ${selectedPayment.value}\n\n` +
+      `⚠️ _Please look at the attached transaction screenshot below to manually confirm or decline tickets._`
+
+    const formDataPayload = new FormData()
+    formDataPayload.append('chat_id', TELEGRAM_CHAT_ID)
+    formDataPayload.append('caption', telegramMarkdownMessage)
+    formDataPayload.append('parse_mode', 'Markdown')
+    formDataPayload.append('photo', uploadedFileRaw.value, `receipt_${generatedInvoiceId.value}.png`)
+
+    const telegramEndpointUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`
+    const apiResponse = await fetch(telegramEndpointUrl, {
+      method: 'POST',
+      body: formDataPayload
+    })
+
+    if (!apiResponse.ok) {
+      throw new Error(`Telegram API Error status returned: ${apiResponse.status}`)
+    }
+
+    const docRef = doc(db, 'showtimes_seats', documentId.value)
+    const updatedSeatPlan = seatPlan.value.map(row => {
+      return {
+        ...row,
+        seats: row.seats.map(seat => {
+          const isChosen = selectedSeats.value.some(s => s.id === seat.id)
+          if (isChosen) return { ...seat, isTaken: true }
+          return seat
+        })
+      }
+    })
+
+    await updateDoc(docRef, { seats: updatedSeatPlan })
+    
+    bookingStep.value = 'success-receipt'
+    
+    const detectedSeatType = selectedSeats.value[0]?.type || 'Standard'
+    const currentUserId = auth.currentUser ? auth.currentUser.uid : null
+
+    const ticketPayload = {
+      userId: currentUserId,
+      movieTitle: props.currentLang === 'EN' 
+        ? (selectedMovie.value?.title?.EN || 'Unknown Movie') 
+        : (selectedMovie.value?.title?.KH || 'ភាពយន្តមិនស្គាល់'),
+      movieTitleEN: selectedMovie.value?.title?.EN || 'Unknown Movie',
+      movieTitleKH: selectedMovie.value?.title?.KH || 'ភាពយន្តមិនស្គាល់',
+      movieImage: selectedMovie.value?.poster || selectedMovie.value?.image || 'https://via.placeholder.com/150',
+      seatType: detectedSeatType,
+      seats: selectedSeats.value.map(s => s.id),
+      time: selectedTime.value,
+      date: currentDates.value[activeDateIndex.value].dayNumber + ' ' + currentDates.value[activeDateIndex.value].month,
+      total: totalPrice.value,
+      payment: selectedPayment.value,
+      invoiceId: generatedInvoiceId.value,
+      createdAt: new Date()
+    }
+
+    if (currentUserId) {
+      const docRefNewTicket = await addDoc(collection(db, "bookings"), ticketPayload)
+      console.log("រក្សាទុកសំបុត្រទៅកាន់ Firestore ជោគជ័យ!")
+
+      if (!bookingStore.tickets) bookingStore.tickets = []
+      bookingStore.tickets.push({
+        id: docRefNewTicket.id,
+        ...ticketPayload
+      })
+    }
+
+    bookingStore.addTickets(selectedSeats.value.length, ticketPayload)
+
+  } catch (error) {
+    console.error("Critical submission payload error caught:", error)
+    alert("ការផ្ញើភស្តុតាងមានបញ្ហា! Please verify your network connection or try again.")
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+let autoSlideInterval = null
+
 onMounted(() => {
-  setInterval(() => { currentSlide.value = (currentSlide.value + 1) % topSlides.length }, 6000)
+  fetchMovies()
+  autoSlideInterval = setInterval(() => { 
+    currentSlide.value = (currentSlide.value + 1) % topSlides.length 
+  }, 6000)
+})
+
+onUnmounted(() => {
+  if (autoSlideInterval) clearInterval(autoSlideInterval) 
 })
 </script>
 
@@ -481,7 +865,6 @@ onMounted(() => {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Fixed: Closed keyframe scoping properly */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.97); }
   to { opacity: 1; transform: scale(1); }

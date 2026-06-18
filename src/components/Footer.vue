@@ -1,176 +1,110 @@
 <template>
-  <footer 
-    class="font-sans border-t pt-12 pb-6 transition-colors duration-300"
-    :class="currentTheme === 'dark' ? 'bg-[#0b0707] border-[#1f1a1a] text-[#a3a3a3]' : 'bg-gray-50 border-gray-200 text-gray-600'"
-  >
+  <footer class="font-sans border-t pt-12 pb-6 transition-colors duration-300"
+    :class="currentTheme === 'dark' ? 'bg-[#0b0707] border-[#1f1a1a] text-[#a3a3a3]' : 'bg-gray-50 border-gray-200 text-gray-600'">
+    
     <div class="max-w-[1250px] mx-auto px-4">
-      
+
+      <!-- For input Data for code to firebase -->
+       
+      <!-- <div class="mb-6 p-4 bg-gray-800/10 rounded-lg border border-dashed border-gray-500">
+        <button 
+          @click="runSeeding" 
+          class="text-xs text-red-500 hover:underline font-bold uppercase"
+        >
+          [Admin] Seed Movies to Firestore
+        </button>
+      </div> -->
+
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-        
         <div>
-          <h5 
-            class="font-bold text-sm md:text-[0.95rem] tracking-wider mb-4 transition-colors duration-300"
-            :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'"
-          >
-            {{ t.company }}
-          </h5>
-          <ul class="space-y-2.5 p-0 m-0 list-none">
-            <li>
-              <a href="#" class="text-sm no-underline transition-all duration-200 hover:pl-1"
-                :class="currentTheme === 'dark' ? 'text-[#9ca3af] hover:text-[#e5e7eb]' : 'text-gray-500 hover:text-black'">
-                {{ t.aboutUs }}
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-sm no-underline transition-all duration-200 hover:pl-1"
-                :class="currentTheme === 'dark' ? 'text-[#9ca3af] hover:text-[#e5e7eb]' : 'text-gray-500 hover:text-black'">
-                {{ t.contactUs }}
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-sm no-underline transition-all duration-200 hover:pl-1"
-                :class="currentTheme === 'dark' ? 'text-[#9ca3af] hover:text-[#e5e7eb]' : 'text-gray-500 hover:text-black'">
-                {{ t.cinemas }}
-              </a>
-            </li>
+          <h5 class="font-bold text-sm mb-4" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">{{ t.company }}</h5>
+          <ul class="space-y-2.5 list-none">
+            <li><a href="#" class="text-sm hover:text-[#e50914] transition-colors">{{ t.aboutUs }}</a></li>
+            <li><a href="#" class="text-sm hover:text-[#e50914] transition-colors">{{ t.contactUs }}</a></li>
           </ul>
         </div>
 
         <div>
-          <h5 
-            class="font-bold text-sm md:text-[0.95rem] tracking-wider mb-4 transition-colors duration-300"
-            :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'"
-          >
-            {{ t.more }}
-          </h5>
-          <ul class="space-y-2.5 p-0 m-0 list-none">
-            <li>
-              <a href="#" class="text-sm no-underline transition-all duration-200 hover:pl-1"
-                :class="currentTheme === 'dark' ? 'text-[#9ca3af] hover:text-[#e5e7eb]' : 'text-gray-500 hover:text-black'">
-                {{ t.promotions }}
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-sm no-underline transition-all duration-200 hover:pl-1"
-                :class="currentTheme === 'dark' ? 'text-[#9ca3af] hover:text-[#e5e7eb]' : 'text-gray-500 hover:text-black'">
-                {{ t.newsActivity }}
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-sm no-underline transition-all duration-200 hover:pl-1"
-                :class="currentTheme === 'dark' ? 'text-[#9ca3af] hover:text-[#e5e7eb]' : 'text-gray-500 hover:text-black'">
-                {{ t.myTicket }}
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-sm no-underline transition-all duration-200 hover:pl-1"
-                :class="currentTheme === 'dark' ? 'text-[#9ca3af] hover:text-[#e5e7eb]' : 'text-gray-500 hover:text-black'">
-                {{ t.termsConditions }}
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-sm no-underline transition-all duration-200 hover:pl-1"
-                :class="currentTheme === 'dark' ? 'text-[#9ca3af] hover:text-[#e5e7eb]' : 'text-gray-500 hover:text-black'">
-                {{ t.privacyPolicy }}
-              </a>
-            </li>
+          <h5 class="font-bold text-sm mb-4" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">{{ t.more }}</h5>
+          <ul class="space-y-2.5 list-none">
+            <li><a href="#" class="text-sm hover:text-[#e50914] transition-colors">{{ t.promotions }}</a></li>
+            <li><a href="#" class="text-sm hover:text-[#e50914] transition-colors">{{ t.myTicket }}</a></li>
           </ul>
         </div>
 
         <div class="col-span-2 sm:col-span-1">
-          <h5 
-            class="font-bold text-sm md:text-[0.95rem] tracking-wider mb-4 transition-colors duration-300"
-            :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'"
-          >
-            {{ t.downloadApp }}
-          </h5>
+          <h5 class="font-bold text-sm mb-4" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">{{ t.downloadApp }}</h5>
           <div class="flex gap-3">
-            <a href="#" class="w-10 h-10 md:w-11 md:h-11 border rounded-full flex items-center justify-center text-lg no-underline transition-all duration-200 hover:scale-108" 
-              :class="currentTheme === 'dark' ? 'bg-[#141414] border-[#2d2d2d] text-white hover:bg-white hover:text-black' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white'"
-              title="Google Play"
-            >
-              <i class="fab fa-google-play"></i>
-            </a>
-            <a href="#" class="w-10 h-10 md:w-11 md:h-11 border rounded-full flex items-center justify-center text-lg no-underline transition-all duration-200 hover:scale-108" 
-              :class="currentTheme === 'dark' ? 'bg-[#141414] border-[#2d2d2d] text-white hover:bg-white hover:text-black' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white'"
-              title="App Store"
-            >
-              <i class="fab fa-apple"></i>
-            </a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" class="h-10 cursor-pointer hover:opacity-80">
+            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" class="h-10 cursor-pointer hover:opacity-80">
           </div>
         </div>
 
         <div class="col-span-2 sm:col-span-1">
-          <h5 
-            class="font-bold text-sm md:text-[0.95rem] tracking-wider mb-4 transition-colors duration-300"
-            :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'"
-          >
-            {{ t.followSocial }}
-          </h5>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="w-9 h-9 border rounded-full flex items-center justify-center text-[0.95rem] no-underline transition-all duration-250 cubic-bezier hover:text-white hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:bg-[#1877f2] hover:border-[#1877f2]" :class="currentTheme === 'dark' ? 'bg-[#141414] border-[#2d2d2d] text-[#e5e7eb]' : 'bg-white border-gray-300 text-gray-600'"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="w-9 h-9 border rounded-full flex items-center justify-center text-[0.95rem] no-underline transition-all duration-250 cubic-bezier hover:text-white hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:bg-[#c13584] hover:border-[#c13584]" :class="currentTheme === 'dark' ? 'bg-[#141414] border-[#2d2d2d] text-[#e5e7eb]' : 'bg-white border-gray-300 text-gray-600'"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="w-9 h-9 border rounded-full flex items-center justify-center text-[0.95rem] no-underline transition-all duration-250 cubic-bezier hover:text-white hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:bg-[#ff0000] hover:border-[#ff0000]" :class="currentTheme === 'dark' ? 'bg-[#141414] border-[#2d2d2d] text-[#e5e7eb]' : 'bg-white border-gray-300 text-gray-600'"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="w-9 h-9 border rounded-full flex items-center justify-center text-[0.95rem] no-underline transition-all duration-250 cubic-bezier hover:text-white hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:bg-[#010101] hover:border-[#444]" :class="currentTheme === 'dark' ? 'bg-[#141414] border-[#2d2d2d] text-[#e5e7eb]' : 'bg-white border-gray-300 text-gray-600'"><i class="fab fa-tiktok"></i></a>
-            <a href="#" class="w-9 h-9 border rounded-full flex items-center justify-center text-[0.95rem] no-underline transition-all duration-250 cubic-bezier hover:text-white hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:bg-[#0088cc] hover:border-[#0088cc]" :class="currentTheme === 'dark' ? 'bg-[#141414] border-[#2d2d2d] text-[#e5e7eb]' : 'bg-white border-gray-300 text-gray-600'"><i class="fab fa-telegram-plane"></i></a>
+          <h5 class="font-bold text-sm mb-4" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">{{ t.followSocial }}</h5>
+          <div class="flex gap-3">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" class="w-8 h-8 cursor-pointer hover:-translate-y-1 transition-transform" title="Facebook">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="w-8 h-8 cursor-pointer hover:-translate-y-1 transition-transform" title="Instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" class="w-8 h-8 cursor-pointer hover:-translate-y-1 transition-transform" title="Youtube">
           </div>
         </div>
-
       </div>
 
-      <hr class="my-6 transition-colors duration-300" :class="currentTheme === 'dark' ? 'border-gray-700/30' : 'border-gray-200'">
+      <hr class="my-6" :class="currentTheme === 'dark' ? 'border-gray-700/30' : 'border-gray-200'">
 
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-        
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
-          <h6 class="text-xs font-bold uppercase tracking-wider mb-3 text-gray-500">{{ t.payment }}</h6>
-          <div class="flex items-center justify-center md:justify-start gap-5 select-none">
-            <span class="font-sans font-black italic text-[1.2rem] tracking-tighter transition-colors duration-300" :class="currentTheme === 'dark' ? 'text-white' : 'text-gray-900'">
-              ABA' <span class="bg-[#00b5cc] text-black text-[0.65rem] font-black not-italic px-1.5 py-0.5 rounded vertical-middle tracking-normal">PAYWAY</span>
-            </span>
-            <i class="fab fa-cc-visa text-[#1434cb] text-[2.2rem] opacity-80 transition-all duration-200 hover:opacity-100 hover:scale-105" title="Visa"></i>
-            <i class="fab fa-cc-mastercard text-[#ff5f00] text-[2.2rem] opacity-80 transition-all duration-200 hover:opacity-100 hover:scale-105" title="Mastercard"></i>
+          <h6 class="text-xs font-bold uppercase mb-3 text-gray-500">{{ t.payment }}</h6>
+          <div class="flex items-center gap-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/KHQR_Logo.png" class="h-4 object-contain">
+            <img src="https://informal.digitaleconomy.gov.kh/images/ministry-icon/aba_round.png" class="h-7">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" class="h-6">
           </div>
         </div>
-
-        <div class="text-xs text-gray-500 md:mt-6">
-          <p class="m-0">{{ t.rightsReserved }} &copy; 2026</p>
-        </div>
-
+        <p class="text-xs text-gray-500">{{ t.rightsReserved }} &copy; 2026</p>
       </div>
-
     </div>
   </footer>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { seedMovies } from '@/services/seed';
 
-// កែប្រែ៖ ប្រកាសទទួលយក Prop `currentTheme` ពី App.vue
 const props = defineProps({
   currentLang: { type: String, default: 'EN' },
-  currentTheme: { type: String, default: 'dark' } // តម្លៃលំនាំដើមគឺ 'dark'
+  currentTheme: { type: String, default: 'dark' }
 })
 
-// វចនានុក្រមបកប្រែសម្រាប់ Footer
-const translations = {
-  EN: {
-    company: 'Company', aboutUs: 'About Us', contactUs: 'Contact Us', cinemas: 'Cinemas',
-    more: 'More', promotions: 'Promotions', newsActivity: 'News & Activity', myTicket: 'My Ticket', termsConditions: 'Terms & Conditions', privacyPolicy: 'Privacy & Policy',
-    downloadApp: 'Download Our App', followSocial: 'Follow Our Social Media', payment: 'Payment', rightsReserved: 'All rights reserved'
-  },
-  KH: {
-    company: 'ក្រុមហ៊ុន', aboutUs: 'អំពីយើង', contactUs: 'ទាក់ទងយើង', cinemas: 'រោងភាពយន្ត',
-    more: 'បន្ថែមទៀត', promotions: 'ប្រម៉ូសិន', newsActivity: 'ព័ត៌មាន និងសកម្មភាព', myTicket: 'សំបុត្ររបស់ខ្ញុំ', termsConditions: 'លក្ខខណ្ឌផ្សេងៗ', privacyPolicy: 'គោលការណ៍ឯកជនភាព',
-    downloadApp: 'ទាញយកកម្មវិធីទូរស័ព្ទ', followSocial: 'តាមដានបណ្តាញសង្គម', payment: 'ការទូទាត់ប្រាក់', rightsReserved: 'រក្សាសិទ្ធិគ្រប់យ៉ាង'
+// មុខងារនេះនឹងដំណើរការនៅពេលអ្នកចុចប៊ូតុង [Admin] នៅលើ Footer
+const runSeeding = async () => {
+  const confirmSeed = confirm("តើអ្នកចង់ចាប់ផ្ដើម Seed ទិន្នន័យភាពយន្តទៅ Firebase មែនទេ?")
+  if (!confirmSeed) return
+
+  try {
+    console.log("កំពុងចាប់ផ្ដើមផ្ញើទិន្នន័យ...")
+    await seedMovies()
+    alert('✅ ជោគជ័យ! ទិន្នន័យទាំងអស់ត្រូវបានផ្ញើទៅ Firestore រួចរាល់')
+  } catch (error) {
+    console.error('❌ មានកំហុស៖', error)
+    alert('មានកំហុស៖ ' + error.message)
   }
 }
 
-const t = computed(() => translations[props.currentLang])
-</script>
-
-<style scoped>
-.cubic-bezier {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+const translations = {
+  EN: {
+    company: 'Company', aboutUs: 'About Us', contactUs: 'Contact Us',
+    more: 'More', promotions: 'Promotions', myTicket: 'My Ticket',
+    downloadApp: 'Download Our App', followSocial: 'Follow Social Media',
+    payment: 'Payment', rightsReserved: 'All rights reserved'
+  },
+  KH: {
+    company: 'ក្រុមហ៊ុន', aboutUs: 'អំពីយើង', contactUs: 'ទាក់ទងយើង',
+    more: 'បន្ថែមទៀត', promotions: 'ប្រម៉ូសិន', myTicket: 'សំបុត្ររបស់ខ្ញុំ',
+    downloadApp: 'ទាញយកកម្មវិធី', followSocial: 'តាមដានបណ្តាញសង្គម',
+    payment: 'ការទូទាត់ប្រាក់', rightsReserved: 'រក្សាសិទ្ធិគ្រប់យ៉ាង'
+  }
 }
-</style>
+
+const t = computed(() => translations[props.currentLang] || translations.EN)
+</script>

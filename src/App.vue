@@ -5,17 +5,20 @@
       'min-h-screen select-none transition-colors duration-300'
     ]"
   >
-    <Navbar 
+    <Navbar
       :current-lang="currentLang" 
       :current-theme="currentTheme"
       @change-language="updateLanguage"
       @toggle-theme="updateTheme"
     />
     
-    <HomePage 
-      :current-lang="currentLang"
-      :current-theme="currentTheme"
-    />
+    <!-- លុប <HomePage /> ចេញ ហើយជំនួសដោយ <router-view /> -->
+    <main class="pt-[100px]">
+      <router-view 
+        :current-lang="currentLang"
+        :current-theme="currentTheme"
+      />
+    </main>
     
     <Footer :currentLang="currentLang" :currentTheme="currentTheme" />
   </div>
@@ -23,20 +26,17 @@
 
 <script setup>
 import { ref } from 'vue'
-
-import HomePage from './components/HomePage.vue'
+// លុប import HomePage ចេញពីទីនេះ ព្រោះយើងនឹងហៅវាតាមរយៈ router
 import Footer from './components/Footer.vue'
 import Navbar from './components/Navbar.vue'
 
 const currentLang = ref('EN')
-// បន្ថែម State សម្រាប់គ្រប់គ្រង Theme (Default គឺ 'dark')
 const currentTheme = ref('dark')
 
 const updateLanguage = (lang) => {
   currentLang.value = lang
 }
 
-// អនុគមន៍សម្រាប់ប្តូរ Mode ពី dark ទៅ light ឬ light ទៅ dark
 const updateTheme = () => {
   currentTheme.value = currentTheme.value === 'dark' ? 'light' : 'dark'
 }
