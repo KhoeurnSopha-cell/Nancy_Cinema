@@ -13,8 +13,7 @@
         </div>
         <div class="searchBox relative z-[9999] flex items-center px-4 rounded-full border h-9 w-56 bg-gray-100 dark:bg-[#251c1c] transition-all">
   
-  <img src="https://static.vecteezy.com/system/resources/thumbnails/013/083/246/small/search-ui-icon-png.png"
-    class="w-4.5 h-4.5 ml-2">
+  
 
   <input v-model="searchQuery" type="text" :placeholder="t.searchMovies"
     class="w-full bg-transparent pl-2 text-[12px] outline-none placeholder-gray-400 dark:placeholder-gray-500 transition-all text-neutral-800 dark:text-neutral-200" />

@@ -1,38 +1,42 @@
 <template>
-    <section class="py-20 transition-colors duration-300"
+    <section class="py-12 transition-colors duration-300"
         :class="currentTheme === 'dark' ? 'bg-black text-white' : 'bg-white text-gray-900'">
 
-        <div class="container mx-auto px-6">
-            <div class="flex justify-center gap-4 mb-12">
-                <button v-for="tab in ['All', 'Combos', 'Drinks', 'Snacks']" :key="tab" @click="activeTab = tab" :class="[
-                    activeTab === tab ? 'bg-yellow-500 text-black' : (currentTheme === 'dark' ? 'bg-zinc-900 text-white' : 'bg-gray-200 text-gray-800'),
-                    'px-6 py-2 rounded-full font-bold transition-all'
-                ]">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button v-for="tab in ['All', 'Combos', 'Drinks', 'Snacks']" :key="tab" 
+                    @click="activeTab = tab" 
+                    :class="[
+                        activeTab === tab 
+                            ? 'bg-yellow-500 text-black' 
+                            : (currentTheme === 'dark' ? 'bg-zinc-900 text-white' : 'bg-gray-200 text-gray-800'),
+                        'px-4 py-2 text-sm md:px-6 md:py-2 rounded-full font-bold transition-all'
+                    ]">
                     {{ tab }}
                 </button>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 <div v-for="item in filteredItems" :key="item.id"
                     class="group rounded-2xl overflow-hidden border transition-all duration-300"
-                    :class="currentTheme === 'dark' ? 'bg-zinc-900 border-zinc-800 hover:border-yellow-500' : 'bg-gray-100 border-gray-200 hover:border-yellow-500'">
+                    :class="currentTheme === 'dark' ? 'bg-zinc-900 border-zinc-800' : 'bg-gray-50 border-gray-200'">
 
-                    <div class="h-48 overflow-hidden">
+                    <div class="h-40 md:h-48 overflow-hidden">
                         <img :src="item.img" :alt="item.title"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
 
-                    <div class="p-5">
-                        <h3 class="font-bold text-lg mb-1">{{ currentLang === 'EN' ? item.title : item.title_kh }}</h3>
-                        <p class="text-sm mb-4 h-10 line-clamp-2"
-                            :class="currentTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'">
-                            {{ currentLang === 'EN' ? item.desc : item.desc_kh }}
+                    <div class="p-4">
+                        <h3 class="font-bold text-base md:text-lg mb-1 truncate">
+                            {{ currentLang === 'EN' ? item.title : (item.title_kh || item.title) }}
+                        </h3>
+                        <p class="text-xs md:text-sm mb-4 h-8 md:h-10 line-clamp-2 opacity-70">
+                            {{ currentLang === 'EN' ? item.desc : (item.desc_kh || item.desc) }}
                         </p>
 
                         <div class="flex justify-between items-center">
-                            <span class="text-yellow-500 font-black text-xl">{{ item.price }}</span>
-                            <button
-                                class="bg-yellow-500 text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-yellow-400 transition">
+                            <span class="text-yellow-500 font-black text-lg md:text-xl">{{ item.price }}</span>
+                            <button class="bg-yellow-500 text-black px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-bold hover:bg-yellow-400 transition">
                                 {{ currentLang === 'EN' ? 'Add' : 'បន្ថែម' }}
                             </button>
                         </div>
