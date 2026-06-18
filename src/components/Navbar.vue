@@ -4,21 +4,20 @@
       :class="currentTheme === 'dark' ? 'bg-[#0b0707]/90 border-white/5 text-white' : 'bg-white/90 border-gray-200 text-gray-800'">
 
       <header
-        class="relative flex justify-between items-center px-4 md:px-6 h-[65px] border-b transition-colors duration-300"
+        class="relative flex justify-between items-center px-4 md:px-6 h-[65px] border-b transition-colors duration-300 pt-20 pb-7 "
         :class="currentTheme === 'dark'
           ? 'bg-[#251c1c] border-white/10 text-white'
           : 'bg-gray-100 border-gray-200 text-gray-800'">
-
-        <div class="absolute left-1/2 -translate-x-1/2 ">
-          <img src="/Nencylogo.png" class="h-35 w-auto object-contain" alt="Logo" />
+ <div class="absolute left-1/2 -translate-x-1/2 ">
+          <img src="/Nencylogo.png" class="h-45 w-auto object-contain mb-20" alt="Logo" />
         </div>
-        <div
-          class="searchBox relative z-[9999] flex items-center md:px-4 md:rounded-full md:border h-9 w-56 bg-gray-100 dark:bg-[#251c1c] transition-all">
-          <img src="https://static.vecteezy.com/system/resources/thumbnails/013/083/246/small/search-ui-icon-png.png"
-            class="w-4.5 h-4.5 ml-2">
+        <div class="searchBox relative z-[9999] flex items-center px-4 rounded-full border h-9 w-56 bg-gray-100 dark:bg-[#251c1c] transition-all">
+  
+  <img src="https://static.vecteezy.com/system/resources/thumbnails/013/083/246/small/search-ui-icon-png.png"
+    class="w-4.5 h-4.5 ml-2">
 
-          <input v-model="searchQuery" type="text" :placeholder="t.searchMovies"
-            class="w-full bg-transparent pl-2 text-[12px] outline-none placeholder-gray-400 dark:placeholder-gray-500 transition-all text-neutral-800 dark:text-neutral-200" />
+  <input v-model="searchQuery" type="text" :placeholder="t.searchMovies"
+    class="w-full bg-transparent pl-2 text-[12px] outline-none placeholder-gray-400 dark:placeholder-gray-500 transition-all text-neutral-800 dark:text-neutral-200" />
 
           <div v-if="searchQuery"
             class="absolute top-11 left-0 w-64 max-h-60 overflow-y-auto rounded-xl shadow-xl border backdrop-blur-lg z-[99999]"
@@ -65,7 +64,7 @@
             <button @click="toggleDropdown"
               class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border transition-all text-xs font-medium"
               :class="currentTheme === 'dark' ? 'border-white/10 hover:bg-white/5' : 'border-gray-200 hover:bg-gray-50'">
-              <span>{{ currentLang === 'EN' ? 'EN' : 'KH' }}</span>
+              <span>{{ currentLang === 'EN' ? ' EN' : 'KH' }}</span>
               <ChevronDown class="w-3.5 h-3.5 transition-transform duration-300"
                 :class="{ 'rotate-180': isDropdownOpen }" />
             </button>
@@ -94,8 +93,7 @@
         </div>
       </header>
 
-      <nav
-        class=" m flex items-center justify-start px-4 md:px-6 h-[45px] overflow-x-auto no-scrollbar scroll-smooth gap-6 text-xs md:text-sm font-medium">
+      <nav class="relative z-20 flex items-center justify-start px-4 md:px-6 h-[45px] overflow-x-auto no-scrollbar scroll-smooth gap-6 text-xs md:text-sm font-medium">
         <router-link to="/" class=" hover:text-[#e50914] transition-colors whitespace-nowrap"
           :class="{ 'text-[#e50914]': route.path === '/' }">{{ t.home }}</router-link>
         <router-link to="/cinemas" class="hover:text-[#e50914] transition-colors whitespace-nowrap"
@@ -447,7 +445,7 @@ const translations = {
   KH: {
     searchMovies: 'ស្វែងរកភាពយន្ត...',
     ticket: 'សំបុត្រ',
-    joinNow: 'ចូលរួមឥឡូវនេះ',
+    joinNow: 'ចូលរួម',
     home: 'ទំព័រដើម',
     cinemas: 'រោងភាពយន្ត',
     offers: 'ការផ្តល់ជូន',

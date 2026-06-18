@@ -13,7 +13,7 @@
     />
     
     <!-- លុប <HomePage /> ចេញ ហើយជំនួសដោយ <router-view /> -->
-    <main class="pt-[100px]">
+    <main class="pt-[150px]">
       <router-view 
         :current-lang="currentLang"
         :current-theme="currentTheme"
