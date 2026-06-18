@@ -65,7 +65,7 @@
             <button @click="toggleDropdown"
               class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border transition-all text-xs font-medium"
               :class="currentTheme === 'dark' ? 'border-white/10 hover:bg-white/5' : 'border-gray-200 hover:bg-gray-50'">
-              <span>{{ currentLang === 'EN' ? '🇬🇧 EN' : '🇰🇭 KH' }}</span>
+              <span>{{ currentLang === 'EN' ? 'EN' : 'KH' }}</span>
               <ChevronDown class="w-3.5 h-3.5 transition-transform duration-300"
                 :class="{ 'rotate-180': isDropdownOpen }" />
             </button>
@@ -76,12 +76,12 @@
               <button @click="changeLanguage('EN')"
                 class="w-full text-left px-3 py-2 text-xs flex items-center gap-2 transition-colors"
                 :class="[currentLang === 'EN' ? 'bg-[#e50914] text-white' : (currentTheme === 'dark' ? 'hover:bg-white/5' : 'hover:bg-gray-50')]">
-                <span>🇬🇧</span> English
+                 English
               </button>
               <button @click="changeLanguage('KH')"
                 class="w-full text-left px-3 py-2 text-xs flex items-center gap-2 transition-colors"
                 :class="[currentLang === 'KH' ? 'bg-[#e50914] text-white' : (currentTheme === 'dark' ? 'hover:bg-white/5' : 'hover:bg-gray-50')]">
-                <span>🇰🇭</span> ភាសាខ្មែរ
+                 ភាសាខ្មែរ
               </button>
             </div>
           </div>
@@ -102,8 +102,10 @@
           :class="{ 'text-[#e50914]': route.path === '/cinemas' }">{{ t.cinemas }}</router-link>
         <router-link to="/offers" class="hover:text-[#e50914] transition-colors whitespace-nowrap"
           :class="{ 'text-[#e50914]': route.path === '/offers' }">{{ t.offers }}</router-link>
-        <router-link to="/fb" class="hover:text-[#e50914] transition-colors whitespace-nowrap"
-          :class="{ 'text-[#e50914]': route.path === '/fb' }">{{ t.fb }}</router-link>
+        <router-link to="/food-beverage" class="hover:text-[#e50914] transition-colors whitespace-nowrap"
+          :class="{ 'text-[#e50914]': route.path === '/food-beverage' }">
+          F&B
+        </router-link>
       </nav>
     </div>
 

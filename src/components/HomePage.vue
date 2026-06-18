@@ -381,7 +381,7 @@
                 />
                 
                 <div v-else class="text-center space-y-3 pointer-events-none flex flex-col items-center">
-                  <span class="text-3xl text-neutral-600 opacity-80">📁</span>
+                  <span class="text-3xl text-neutral-600 opacity-80"></span>
                   <p class="text-xs font-bold text-neutral-500 tracking-wide">
                     {{ currentLang === 'EN' ? 'No image selected yet' : 'មិនទាន់មានរូបភាពជ្រើសរើសឡើយ' }}
                   </p>
